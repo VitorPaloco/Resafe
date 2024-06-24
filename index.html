@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resafe</title>
-    <link rel="stylesheet" href="C:\Users\Vitor\Downloads\Resafe\style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -94,6 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Limpar campos do formulário após adicionar a receita
         formReceita.reset();
+    });
+    // Evento para fechar a modal ao clicar no botão "X"
+    var modalCloseButton = document.querySelector('.close');
+    modalCloseButton.addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
     });
 });
     </script>
