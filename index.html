@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resafe</title>
-    <link rel="stylesheet" href="C:\Users\Vitor\Downloads\Resafe\style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Resafe</h1>
+        <h1>RESAFE</h1>
     </header>
     <main>
         <section id="receitas">
@@ -25,5 +25,82 @@
             </form>
         </section>
     </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-nome"></h2>
+            <p id="modal-ingredientes"></p>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // scripts.js
+
+// scripts.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Array para armazenar as receitas
+    var receitasSalvas = [];
+
+    // Selecionar o formulário de adicionar receita
+    var formReceita = document.getElementById('form-receita');
+
+    // Selecionar a seção onde as receitas serão exibidas
+    var receitasContainer = document.getElementById('receitas');
+
+    // Função para adicionar uma nova receita
+    function adicionarReceita(nome, ingredientes) {
+        // Criar objeto de receita
+        var novaReceita = {
+            nome: nome,
+            ingredientes: ingredientes
+        };
+
+        // Adicionar a nova receita ao array
+        receitasSalvas.push(novaReceita);
+
+        // Limpar conteúdo anterior da seção de receitas
+        receitasContainer.innerHTML = '';
+
+        // Atualizar a exibição das receitas
+        receitasSalvas.forEach(function(receita) {
+            var receitaBlock = document.createElement('div');
+            receitaBlock.classList.add('receita-block');
+            receitaBlock.innerHTML = '<h3>' + receita.nome + '</h3><p>' + receita.ingredientes + '</p>';
+
+            // Adicionar evento para exibir detalhes da receita em um modal (se necessário)
+            receitaBlock.addEventListener('click', function() {
+                document.getElementById('modal-nome').textContent = receita.nome;
+                document.getElementById('modal-ingredientes').textContent = receita.ingredientes;
+                document.getElementById('modal').style.display = 'block';
+            });
+
+            receitasContainer.appendChild(receitaBlock);
+        });
+    }
+
+    // Adicionar evento de submit ao formulário
+    formReceita.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o comportamento padrão de recarregar a página
+
+        // Obter valores do formulário
+        var nomeReceita = document.getElementById('nome').value;
+        var ingredientesReceita = document.getElementById('ingredientes').value;
+
+        // Chamar função para adicionar a nova receita
+        adicionarReceita(nomeReceita, ingredientesReceita);
+
+        // Limpar campos do formulário após adicionar a receita
+        formReceita.reset();
+    });
+    // Evento para fechar a modal ao clicar no botão "X"
+    var modalCloseButton = document.querySelector('.close');
+    modalCloseButton.addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
+    });
+});
+    </script>
 </body>
 </html>
